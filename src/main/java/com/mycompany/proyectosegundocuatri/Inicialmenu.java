@@ -20,8 +20,8 @@ public class Inicialmenu {
             
             opcion = JOptionPane.showInputDialog("""
                                                  === Para el ingreso, por favor, compre su entrada. ===
-                                                 1. Pase normal: $100. 
-                                                 2. Pase especial: $150. 
+                                                 1. Pase normal: $1000. 
+                                                 2. Pase especial: $1500. 
                                                  3. Volver al menú de inicio. 
                                                  Digite: 1 o 2:""");        
             if ("1".equals(opcion)) {
