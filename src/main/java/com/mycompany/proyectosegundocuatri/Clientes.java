@@ -12,4 +12,6 @@ public class Clientes {
     
     private int id;
     private String nombre;
+    public String apellido;
+    
 }
