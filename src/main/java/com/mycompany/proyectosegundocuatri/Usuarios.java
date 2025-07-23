@@ -9,7 +9,7 @@ package com.mycompany.proyectosegundocuatri;
  * @author willu
  */
 public class Usuarios {
-    private String nombre_rol;
+   private String nombre_rol;
    int rol;
    
    public Usuarios(String nombre_rol, int rol) {

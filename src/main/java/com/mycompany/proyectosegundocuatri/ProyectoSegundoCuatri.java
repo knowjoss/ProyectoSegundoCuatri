@@ -46,19 +46,25 @@ public class ProyectoSegundoCuatri {
             
             JOptionPane.showMessageDialog(null, "Has ingresado como : " + usuarios.getNombre_rol() + " ("+ usuarios.getRol() + ")");
             if (usuarios.getRol() == 1) {
-                int menu_Visitante = Integer.parseInt (JOptionPane.showInputDialog(" --- menu de Visitante --- " + "1. Comprar boletos\n" + "2. Ver atracciones\n" + "3. Ver parqueo"));
+                int menu_Visitante = Integer.parseInt (JOptionPane.showInputDialog(" --- menu de Visitante --- \n" + "1. Comprar boletos\n" + "2. Ver atracciones\n" + "3.Parqueo"));
                 
                 if (menu_Visitante == 1) {
                     Inicialmenu menu = new Inicialmenu();
                     menu.comprarEntradas();
-                    break;
-                 
+                    break; 
+                }else if(menu_Visitante==3){
+                    Parqueo parqueo=new Parqueo();
+                    parqueo.menuParqueo();
+                    
                 }
           
                
             } else if (usuarios.getRol()==2) {
-                String menu_Empleado = JOptionPane.showInputDialog(" --- menu de Visitante --- " + "1. Gestionar atracciones\n" + "2. Ver reportes\n" + "3. Gestionar parqueo");
-  
+                int menu_Empleado = Integer.parseInt (JOptionPane.showInputDialog(" --- menu de Visitante --- " + "1. Gestionar atracciones\n" + "2. Ver reportes\n" + "3. Gestionar parqueo"));
+                if(menu_Empleado==1){
+                    Atracciones atracciones=new Atracciones();
+                    atracciones.menuAtracciones();
+                }
             }
        } else {
             JOptionPane.showMessageDialog(null, "Opcion no valida. Deber elegir '1' o '2'.");
