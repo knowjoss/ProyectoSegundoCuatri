@@ -52,8 +52,7 @@ public class ProyectoSegundoCuatri {
                     Inicialmenu menu = new Inicialmenu();
                     menu.comprarEntradas();
                     break;
-                    
-                    
+                 
                 }
           
                
