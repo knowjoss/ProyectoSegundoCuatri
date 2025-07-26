@@ -8,7 +8,10 @@ package com.mycompany.proyectosegundocuatri;
  *
  * @author willu
  */
+
+
 public class Usuarios {
+    
    private String nombre_rol;
    int rol;
    
@@ -24,5 +27,3 @@ public class Usuarios {
  
    } 
 }
-    
-

@@ -15,7 +15,12 @@ public class Parqueo {
 
     
     public Parqueo() {
-        espacios = new Vehiculo[100];
+        espacios = new Vehiculo[30]; 
+        
+        /* Reduge la cantidad de parqueos a 30, 
+        ya que en 100 no se ve los espacios disponibles completos
+        */
+        
     }
 
     
@@ -65,7 +70,7 @@ public class Parqueo {
         Parqueo parqueo=new Parqueo();
         while (true) {
             
-            String menu = "Menu del Parqueo:\n"
+            String menu = "Menú de Parqueo:\n"
                         + "1. Registrar vehículo\n"
                         + "2. Ver espacios disponibles\n"
                         + "3. Salir";

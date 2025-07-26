@@ -15,7 +15,9 @@ public class ProyectoSegundoCuatri {
     public static void main(String[] args) {        
         
         String opcion = "";
-
+        
+        Boletos sistemaBoletos = new Boletos();
+        
         while (true) {
             opcion = JOptionPane.showInputDialog("""
                                                  === Bienvenidos a Fantasy ===
@@ -25,12 +27,16 @@ public class ProyectoSegundoCuatri {
             
 
             if ("1".equals(opcion)) {
-                String seleccion = JOptionPane.showInputDialog("Por favor, digita '1' si eres visitante o '2' si eres Empleado");
-             if (seleccion == null) {
+                String seleccion = JOptionPane.showInputDialog("Por favor digite: \n" +
+                                                               "'1' Si eres visitante.\n" +
+                                                               "'2' Si eres Empleado.");
+                
+                
+            
+            if (seleccion == null) {
             JOptionPane.showMessageDialog(null, "Proceso cancelado por el usuario");
             return;
-            
-        }
+            }
         
         int opcionRol = Integer.parseInt(seleccion);
         Usuarios usuarios = null;
@@ -38,35 +44,49 @@ public class ProyectoSegundoCuatri {
         if (opcionRol == 1) {
             usuarios = new Usuarios("Visitante", 1);
         } else if (opcionRol == 2) {
-            usuarios = new Usuarios("Empleado",2);
+            usuarios = new Usuarios("Empleado", 2);
             
         }
         
         if (usuarios != null) {
             
-            JOptionPane.showMessageDialog(null, "Has ingresado como : " + usuarios.getNombre_rol() + " ("+ usuarios.getRol() + ")");
             if (usuarios.getRol() == 1) {
-                int menu_Visitante = Integer.parseInt (JOptionPane.showInputDialog(" --- menu de Visitante --- \n" + "1. Comprar boletos\n" + "2. Ver atracciones\n" + "3.Parqueo"));
+                int menu_Visitante = Integer.parseInt (JOptionPane.showInputDialog(" --- Menú de Visitante --- \n" + 
+                                                                                   "1. Comprar boletos.\n" + 
+                                                                                   "2. Reporte.\n" + 
+                                                                                   "3. Parqueo.\n" +
+                                                                                   "4. Salir"));
                 
                 if (menu_Visitante == 1) {
-                    Inicialmenu menu = new Inicialmenu();
-                    menu.comprarEntradas();
-                    break; 
-                }else if(menu_Visitante==3){
-                    Parqueo parqueo=new Parqueo();
+                    sistemaBoletos.comprarEntradas();
+                } 
+                
+                if (menu_Visitante == 2){
+                    sistemaBoletos.mostrarReporte();
+
+                } 
+                
+                if(menu_Visitante==3){
+                    Parqueo parqueo=new Parqueo(); //Mover al apartado de Boletos para ligar al reporte de ventas 
                     parqueo.menuParqueo();
                     
                 }
           
                
             } else if (usuarios.getRol()==2) {
-                int menu_Empleado = Integer.parseInt (JOptionPane.showInputDialog(" --- menu de Visitante --- " + "1. Gestionar atracciones\n" + "2. Ver reportes\n" + "3. Gestionar parqueo"));
+                int menu_Empleado = Integer.parseInt (JOptionPane.showInputDialog("""
+                                                                                  --- Menú de Empleado --- 
+                                                                                  1. Gestionar atracciones
+                                                                                  2. Ver reportes
+                                                                                  3. Gestionar parqueo"""));
+                
                 if(menu_Empleado==1){
-                    Atracciones atracciones=new Atracciones();
+                    Atracciones atracciones= new Atracciones();
                     atracciones.menuAtracciones();
                 }
             }
-       } else {
+            
+        } else {
             JOptionPane.showMessageDialog(null, "Opcion no valida. Deber elegir '1' o '2'.");
         }
     
