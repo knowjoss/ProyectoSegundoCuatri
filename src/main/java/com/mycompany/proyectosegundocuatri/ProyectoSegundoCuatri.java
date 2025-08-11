@@ -16,19 +16,19 @@ public class ProyectoSegundoCuatri {
         
         String opcion = "";
         
-        
-        
-        Boletos sistemaBoletos = new Boletos();
         Atracciones atracciones = new Atracciones(); 
+        Boletos sistemaBoletos = new Boletos(atracciones);
         Parqueo parqueo = new Parqueo(); 
 
         while (true) {
             opcion = JOptionPane.showInputDialog("""
                 ⭐ ¡Bienvenidos a Fantasy, el mejor parque de diversiones! ⭐
-                ⭐ Estamos encantados de tenerte aquí. ⭐
-                ⭐ ¿Qué deseas hacer hoy? ⭐
+                          ⭐ Estamos encantados de tenerte aquí. ⭐
+                                                 
+                ⭐ ¿Qué deseas hacer hoy? ⭐                            
                 1. Entrar a Fantasy.
                 2. Salir de Fantasy.
+                                                 
                 Digite: 1 o 2:""");
 
             if (opcion == null || "2".equals(opcion)) {
@@ -48,23 +48,23 @@ public class ProyectoSegundoCuatri {
                 if ("1".equals(seleccion)) {
                     
                     while (true) {
-                        String menuVisitanteStr = JOptionPane.showInputDialog("--- Menú de Visitante ---\n" +
+                        String menuVisitante = JOptionPane.showInputDialog("--- Menú de Visitante ---\n" +
                                                                              "1. Comprar boletos.\n" +
-                                                                             "2. Recibo.\n" + //Se podria añadir como para que el usuario vea lo que compro
+                                                                             "2. Ir a las Atracciones.\n" + //Se podria añadir como para que el usuario vea lo que compro
                                                                              "3. Parqueo.\n" +
                                                                              "4. Salir");
                         
-                        if (menuVisitanteStr == null || "4".equals(menuVisitanteStr)) {
+                        if (menuVisitante == null || "4".equals(menuVisitante)) {
                             break; 
                         }
 
                         
-                        switch (menuVisitanteStr) {
+                        switch (menuVisitante) {
                             case "1":
                                 sistemaBoletos.comprarEntradas();
                                 break;
                             case "2":
-                                sistemaBoletos.mostrarReporte();
+                                sistemaBoletos.irAtracciones();
                                 break;
                             case "3":
                                 parqueo.menuParqueo();
@@ -74,10 +74,11 @@ public class ProyectoSegundoCuatri {
                                 break;
                         }
                     }
+                    
                 } else if ("2".equals(seleccion)) {
                   
                     while (true) {
-                        String menuEmpleadoStr = JOptionPane.showInputDialog("""
+                        String menuEmpleado = JOptionPane.showInputDialog("""
                             --- Menú de Empleado --- 
                             1. Gestionar atracciones
                             2. Ver reportes
@@ -86,12 +87,12 @@ public class ProyectoSegundoCuatri {
                             """);
                        
                             
-                        if (menuEmpleadoStr == null || "4".equals(menuEmpleadoStr)) {
+                        if (menuEmpleado == null || "4".equals(menuEmpleado)) {
                             break; 
                         }
 
                         
-                        switch (menuEmpleadoStr) {
+                        switch (menuEmpleado) {
                             case "1":
                                 atracciones.menuAtracciones();
                                 break;

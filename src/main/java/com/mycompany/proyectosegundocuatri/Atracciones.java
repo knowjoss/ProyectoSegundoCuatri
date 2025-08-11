@@ -11,8 +11,11 @@ import javax.swing.JOptionPane;
  * @author Yeremy
  */
 public class Atracciones {
+    
+
     private Atraccion[] lista;
     private int contador;
+    
 
     public Atracciones() {
         lista = new Atraccion[20]; 
@@ -136,7 +139,8 @@ public class Atracciones {
                         + "4. Editar atraccion\n"
                         + "5. Eliminar atraccion\n"
                         + "6. Salir";
-            String opcion =JOptionPane.showInputDialog(menu2);
+            
+            String opcion = JOptionPane.showInputDialog(menu2);
 
             switch (opcion) {
                 case "1":
@@ -153,6 +157,7 @@ public class Atracciones {
                     break;
                 case "5":
                      atracciones.eliminarAtraccion();
+                     break; 
                 case "6":
                     JOptionPane.showMessageDialog(null,"Saliendo del sistema");
                     return;
@@ -161,6 +166,62 @@ public class Atracciones {
             }
 
         } 
+    }
+    
+    public void menuVisitante() {
+        while (true) {
+            String menu = "MENÚ Visitas:\n"
+                        + "1. Subirse a una atracción\n"
+                        + "2. Salir";
+            String opcion = JOptionPane.showInputDialog(menu);
+
+            switch (opcion) {
+                case "1":
+                    subirseAtraccion();
+                    break;
+                case "2":
+                    JOptionPane.showMessageDialog(null, "Gracias por su visita!");
+                    return;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción inválida.");
+            }
+        }
+    }
+    public void subirseAtraccion() {
+        if (contador == 0) {
+            JOptionPane.showMessageDialog(null, "No hay atracciones disponibles.");
+            return;
+        }
+
+        String mensaje = "Seleccione una atracción para subirse:\n";
+        for (int i = 0; i < contador; i++) {
+            mensaje += (i + 1) + ". " + lista[i].getNombre() + "\n";
+        }
+
+        String entrada = JOptionPane.showInputDialog(mensaje);
+
+        if (entrada == null || entrada.equals("")) {
+            JOptionPane.showMessageDialog(null, "Opción inválida.");
+            return;
+        }
+
+        int opcion = 0;
+
+        for (int i = 1; i <= contador; i++) {
+            String numeroOpcion = "" + i;
+            if (entrada.equals(numeroOpcion)) {
+                opcion = i;
+                break;
+            }
+        }
+
+        if (opcion > 0) {
+            lista[opcion - 1].incrementarSubida();
+            JOptionPane.showMessageDialog(null, "Te subiste a: " + lista[opcion - 1].getNombre());
+        } else {
+            JOptionPane.showMessageDialog(null, "Número inválido.");
+        }
+
     }
     
 }
