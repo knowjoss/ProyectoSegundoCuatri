@@ -15,56 +15,58 @@ public class ProyectoSegundoCuatri {
     public static void main(String[] args) {        
         
         String opcion = "";
-        
-        
-        
-        Boletos sistemaBoletos = new Boletos();
+        //OBJETOS PRINCIPALES
         Atracciones atracciones = new Atracciones(); 
+        Boletos sistemaBoletos = new Boletos(atracciones);
         Parqueo parqueo = new Parqueo(); 
 
+        //MENU PRINCIPAL
         while (true) {
             opcion = JOptionPane.showInputDialog("""
                 ⭐ ¡Bienvenidos a Fantasy, el mejor parque de diversiones! ⭐
-                ⭐ Estamos encantados de tenerte aquí. ⭐
-                ⭐ ¿Qué deseas hacer hoy? ⭐
+                          ⭐ Estamos encantados de tenerte aquí. ⭐
+                                                 
+                ⭐ ¿Qué deseas hacer hoy? ⭐                            
                 1. Entrar a Fantasy.
                 2. Salir de Fantasy.
+                                                 
                 Digite: 1 o 2:""");
 
             if (opcion == null || "2".equals(opcion)) {
                 JOptionPane.showMessageDialog(null, "¡Hasta pronto!");
                 return; // Sale del programa
             }
-
+            
+             //SELECCION DE TIPO DE USUARIO
             if ("1".equals(opcion)) {
                 String seleccion = JOptionPane.showInputDialog("Por favor digite: \n" +
                                                               "'1' Si eres visitante.\n" +
                                                               "'2' Si eres empleado.");
 
                 if (seleccion == null) {
-                    continue; // Regresa al menú de bienvenida, para que no se devuelva hasta el menu de bienvenida
+                    continue; 
                 }
 
                 if ("1".equals(seleccion)) {
                     
                     while (true) {
-                        String menuVisitanteStr = JOptionPane.showInputDialog("--- Menú de Visitante ---\n" +
+                        String menuVisitante = JOptionPane.showInputDialog("--- Menú de Visitante ---\n" +
                                                                              "1. Comprar boletos.\n" +
-                                                                             "2. Recibo.\n" + //Se podria añadir como para que el usuario vea lo que compro
+                                                                             "2. Ir a las Atracciones.\n" + 
                                                                              "3. Parqueo.\n" +
-                                                                             "4. Salir");
+                                                                             "4.Salir");
                         
-                        if (menuVisitanteStr == null || "4".equals(menuVisitanteStr)) {
+                        if (menuVisitante == null || "4".equals(menuVisitante)) {
                             break; 
                         }
 
                         
-                        switch (menuVisitanteStr) {
+                        switch (menuVisitante) {
                             case "1":
                                 sistemaBoletos.comprarEntradas();
                                 break;
                             case "2":
-                                sistemaBoletos.mostrarReporte();
+                                sistemaBoletos.irAtracciones();
                                 break;
                             case "3":
                                 parqueo.menuParqueo();
@@ -74,24 +76,26 @@ public class ProyectoSegundoCuatri {
                                 break;
                         }
                     }
+                    
                 } else if ("2".equals(seleccion)) {
                   
                     while (true) {
-                        String menuEmpleadoStr = JOptionPane.showInputDialog("""
+                        String menuEmpleado = JOptionPane.showInputDialog("""
                             --- Menú de Empleado --- 
                             1. Gestionar atracciones
                             2. Ver reportes
                             3. Gestionar parqueo 
-                            4. Salir
+                            4. Mostrar Reporte de Usuarios
+                            5.Salir
                             """);
                        
                             
-                        if (menuEmpleadoStr == null || "4".equals(menuEmpleadoStr)) {
+                        if (menuEmpleado == null || "5".equals(menuEmpleado)) {
                             break; 
                         }
 
                         
-                        switch (menuEmpleadoStr) {
+                        switch (menuEmpleado) {
                             case "1":
                                 atracciones.menuAtracciones();
                                 break;
@@ -101,6 +105,8 @@ public class ProyectoSegundoCuatri {
                             case "3":
                                 parqueo.menuParqueo();
                                 break;
+                            case "4":
+                                sistemaBoletos.mostrarReporteUsuarios();
                             default:
                                 JOptionPane.showMessageDialog(null, "Opción no válida.");
                                 break;

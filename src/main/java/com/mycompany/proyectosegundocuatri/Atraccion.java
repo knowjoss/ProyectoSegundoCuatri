@@ -11,10 +11,12 @@ package com.mycompany.proyectosegundocuatri;
 public class Atraccion {
     private String nombre;
     private String descripcion;
+    private int contadorSubidas;
 
     public Atraccion(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.contadorSubidas = 0;
     }
 
     public String getNombre() {
@@ -32,5 +34,13 @@ public class Atraccion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    public void incrementarSubida() {
+        contadorSubidas++;
+    }
+
+    public int getContadorSubidas() {
+        return contadorSubidas;
+    }   
     
 }

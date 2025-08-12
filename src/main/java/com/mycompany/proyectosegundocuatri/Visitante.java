@@ -10,31 +10,31 @@ package com.mycompany.proyectosegundocuatri;
  */
 public class Visitante {
     
-        private String nombre;
-        private String cedula;
-        private int totalPagado;
+    private String nombre;
+    private String cedula;
+    private int totalPagado;
     
 
-        public Visitante(String nombre, String cedula, int totalPagado) {
-            this.nombre = nombre;
-            this.cedula = cedula;
-            this.totalPagado = totalPagado;
-        }
+    public Visitante(String nombre, String cedula, int totalPagado) {
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.totalPagado = totalPagado;
+    }
 
-        public String getNombre() {
-            return nombre;
-        }
+    public String getNombre() {
+        return nombre;
+    }
 
-        public String getCedula() {
-            return cedula;
-        }
+   public String getCedula() {
+        return cedula;
+    }
 
-        public int getTotalPagado() {
-            return totalPagado;
-        } 
+    public int getTotalPagado() {
+        return totalPagado;
+    } 
 
-        public String mostrarInfo() {
-            return "Nombre: " + nombre + ", Cédula: " + cedula + ", Total pagado: ₡" + totalPagado;
-        }
-    
-}
+    public String mostrarInfo() {
+        return "Nombre: " + nombre + ", Cédula: " + cedula + ", Total pagado: ₡" + totalPagado;
+    }
+
+}       
