@@ -10,15 +10,15 @@ import javax.swing.JOptionPane;
  *
  * @author Yeremy
  */
+import javax.swing.JOptionPane;
+
 public class Atracciones {
-    
 
     private Atraccion[] lista;
     private int contador;
-    
 
     public Atracciones() {
-        lista = new Atraccion[20]; 
+        lista = new Atraccion[20];
         contador = 0;
         cargarAtraccionesIniciales();
     }
@@ -59,11 +59,9 @@ public class Atracciones {
 
     public void listarAtracciones() {
         String mensaje = "Lista de atracciones:\n";
-       
 
         for (int i = 0; i < contador; i++) {
             mensaje += (i + 1) + ". " + lista[i].getNombre() + " - " + lista[i].getDescripcion() + "\n";
-            
         }
         JOptionPane.showMessageDialog(null, mensaje);
     }
@@ -76,7 +74,7 @@ public class Atracciones {
             if (lista[i].getNombre().equalsIgnoreCase(nombreBuscado)) {
                 JOptionPane.showMessageDialog(null,
                         "Atracción encontrada:\nNombre: " + lista[i].getNombre() +
-                        "\nDescripción: " + lista[i].getDescripcion());
+                                "\nDescripción: " + lista[i].getDescripcion());
                 encontrada = true;
                 break;
             }
@@ -129,50 +127,49 @@ public class Atracciones {
             JOptionPane.showMessageDialog(null, "Atracción no encontrada.");
         }
     }
-    public void menuAtracciones(){
-        Atracciones atracciones=new Atracciones();
+
+    public void menuAtracciones() {
         while (true) {
             String menu2 = "MENÚ Atracciones:\n"
-                        + "1. Agregar atraccion\n"
-                        + "2. Listar atracciones\n"
-                        + "3. Buscar atraccion\n"
-                        + "4. Editar atraccion\n"
-                        + "5. Eliminar atraccion\n"
-                        + "6. Salir";
-            
+                    + "1. Agregar atracción\n"
+                    + "2. Listar atracciones\n"
+                    + "3. Buscar atracción\n"
+                    + "4. Editar atracción\n"
+                    + "5. Eliminar atracción\n"
+                    + "6. Salir";
+
             String opcion = JOptionPane.showInputDialog(menu2);
 
             switch (opcion) {
                 case "1":
-                    atracciones.agregarAtraccion();
+                    agregarAtraccion();
                     break;
                 case "2":
-                    atracciones.listarAtracciones();
+                    listarAtracciones();
                     break;
                 case "3":
-                    atracciones.buscarAtraccion();
+                    buscarAtraccion();
                     break;
                 case "4":
-                    atracciones.editarAtraccion();
+                    editarAtraccion();
                     break;
                 case "5":
-                     atracciones.eliminarAtraccion();
-                     break; 
+                    eliminarAtraccion();
+                    break;
                 case "6":
-                    JOptionPane.showMessageDialog(null,"Saliendo del sistema");
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema");
                     return;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida.");
             }
-
-        } 
+        }
     }
-    
+
     public void menuVisitante() {
         while (true) {
             String menu = "MENÚ Visitas:\n"
-                        + "1. Subirse a una atracción\n"
-                        + "2. Salir";
+                    + "1. Subirse a una atracción\n"
+                    + "2. Salir";
             String opcion = JOptionPane.showInputDialog(menu);
 
             switch (opcion) {
@@ -187,6 +184,7 @@ public class Atracciones {
             }
         }
     }
+
     public void subirseAtraccion() {
         if (contador == 0) {
             JOptionPane.showMessageDialog(null, "No hay atracciones disponibles.");
@@ -221,7 +219,18 @@ public class Atracciones {
         } else {
             JOptionPane.showMessageDialog(null, "Número inválido.");
         }
-
     }
-    
+
+    // --- MÉTODOS NUEVOS para que Boletos pueda acceder a la lista y contador ---
+
+    public int getContador() {
+        return contador;
+    }
+
+    public Atraccion[] getLista() {
+        return lista;
+    }
+
 }
+
+    

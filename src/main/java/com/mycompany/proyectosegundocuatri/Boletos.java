@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
 public class Boletos {
     
     private Atracciones atracciones;
-    
+    private RegistroSubida[] registrosSubidas = new RegistroSubida[100];
+    private int contadorSubidas = 0;
+
     public Boletos(Atracciones atracciones) {
        this.atracciones = atracciones;
     }
@@ -47,32 +49,79 @@ public class Boletos {
         
     }
 
-    public void irAtracciones() {
-        if (contadorUsuarios == 0) {
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado debe comprar un boleto primero.");
-            return;
+   public void irAtracciones() {
+    if (contadorUsuarios == 0) {
+        JOptionPane.showMessageDialog(null, "Usuario no encontrado, debe comprar un boleto primero.");
+        return;
+    }
+
+    String nombreIngresado = JOptionPane.showInputDialog("Ingrese su nombre:");
+    String cedulaIngresada = JOptionPane.showInputDialog("Ingrese su cédula:");
+
+    Visitante visitanteActual = null;
+
+    for (int i = 0; i < contadorUsuarios; i++) {
+        if (visitante[i].getNombre().equalsIgnoreCase(nombreIngresado) &&
+            visitante[i].getCedula().equalsIgnoreCase(cedulaIngresada)) {
+            visitanteActual = visitante[i];
+            break;
         }
+    }
 
-        String nombreIngresado = JOptionPane.showInputDialog("Ingrese su nombre:");
-        String cedulaIngresada = JOptionPane.showInputDialog("Ingrese su cédula:");
+    if (visitanteActual == null) {
+        JOptionPane.showMessageDialog(null, "Usuario no encontrado o sin boleto registrado.");
+        return;
+    }
 
-        boolean encontrado = false;
+    // Construir mensaje con lista de atracciones
+    String mensaje = "Seleccione una atracción para subirse:\n";
+    for (int i = 0; i < atracciones.getContador(); i++) {
+        mensaje += (i + 1) + ". " + atracciones.getLista()[i].getNombre() + "\n";
+    }
 
-        for (int i = 0; i < contadorUsuarios; i++) {
-            if (visitante[i].getNombre().equalsIgnoreCase(nombreIngresado) &&
-                visitante[i].getCedula().equalsIgnoreCase(cedulaIngresada)) {
-                encontrado = true;
-                break;
-            }
+    String entrada = JOptionPane.showInputDialog(mensaje);
+    if (entrada == null || entrada.equals("")) {
+        JOptionPane.showMessageDialog(null, "Opción inválida.");
+        return;
+    }
+
+    int opcion = 0;
+    try {
+        opcion = Integer.parseInt(entrada);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Número inválido.");
+        return;
+    }
+
+    if (opcion < 1 || opcion > atracciones.getContador()) {
+        JOptionPane.showMessageDialog(null, "Número inválido.");
+        return;
+    }
+
+    Atraccion atraccionElegida = atracciones.getLista()[opcion - 1];
+    atraccionElegida.incrementarSubida();
+
+    // Guardar registro de subida para este visitante y atracción
+    boolean encontrado = false;
+    for (int i = 0; i < contadorSubidas; i++) {
+        if (registrosSubidas[i].nombreVisitante.equalsIgnoreCase(visitanteActual.getNombre()) &&
+            registrosSubidas[i].nombreAtraccion.equalsIgnoreCase(atraccionElegida.getNombre())) {
+            registrosSubidas[i].veces++;
+            encontrado = true;
+            break;
         }
+    }
 
-        if (encontrado) {
-            atracciones.menuVisitante();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado o sin boleto registrado.");
+    if (!encontrado) {
+        if (contadorSubidas < registrosSubidas.length) {
+            registrosSubidas[contadorSubidas] = new RegistroSubida(visitanteActual.getNombre(), atraccionElegida.getNombre());
+            contadorSubidas++;
         }
-        
-    } 
+    }
+
+    JOptionPane.showMessageDialog(null, visitanteActual.getNombre() + " se subió a: " + atraccionElegida.getNombre());
+}
+
     
     public void mostrarReporte() {
         if (contadorUsuarios == 0) {
@@ -87,5 +136,33 @@ public class Boletos {
 
         JOptionPane.showMessageDialog(null, reporte);
     }
+    public void mostrarReporteUsuarios(){
+        if (contadorUsuarios==0){
+            JOptionPane.showMessageDialog(null, "No hay usuarios registrados.");
+            return;
+        }
+        for (int i=0; i< contadorUsuarios;i++){
+            Visitante v=visitante[i];
+            JOptionPane.showMessageDialog(null,"Reporte de visitas de Usuarios"+"\n"+"Nombre:"+v.getNombre()+"\n"+"Cedula:" +v.getCedula());
+            for(int j=0;j<atracciones.getContador();j++){
+                Atraccion a=atracciones.getLista()[j];
+                JOptionPane.showMessageDialog(null,"Nombre:"+a.getNombre()+":"+a.getContadorSubidas()+" veces");
+            }
+        }
+        
+    }
+        
+    private class RegistroSubida {
+    String nombreVisitante;
+    String nombreAtraccion;
+    int veces;
+
+    RegistroSubida(String nombreVisitante, String nombreAtraccion) {
+        this.nombreVisitante = nombreVisitante;
+        this.nombreAtraccion = nombreAtraccion;
+        this.veces = 1;
+    }
+}
+
 }
 

@@ -52,7 +52,7 @@ public class ProyectoSegundoCuatri {
                                                                              "1. Comprar boletos.\n" +
                                                                              "2. Ir a las Atracciones.\n" + //Se podria añadir como para que el usuario vea lo que compro
                                                                              "3. Parqueo.\n" +
-                                                                             "4. Salir");
+                                                                             "4.Salir");
                         
                         if (menuVisitante == null || "4".equals(menuVisitante)) {
                             break; 
@@ -83,11 +83,12 @@ public class ProyectoSegundoCuatri {
                             1. Gestionar atracciones
                             2. Ver reportes
                             3. Gestionar parqueo 
-                            4. Salir
+                            4. Mostrar Reporte de Usuarios
+                            5.Salir
                             """);
                        
                             
-                        if (menuEmpleado == null || "4".equals(menuEmpleado)) {
+                        if (menuEmpleado == null || "5".equals(menuEmpleado)) {
                             break; 
                         }
 
@@ -102,6 +103,8 @@ public class ProyectoSegundoCuatri {
                             case "3":
                                 parqueo.menuParqueo();
                                 break;
+                            case "4":
+                                sistemaBoletos.mostrarReporteUsuarios();
                             default:
                                 JOptionPane.showMessageDialog(null, "Opción no válida.");
                                 break;
